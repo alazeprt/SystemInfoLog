@@ -74,8 +74,20 @@ public class sysinfocommand implements CommandExecutor {
                         }
                         newtps.add(j);
                     }
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aServer TPS From last 5s, 1m, 5m, 15m: ");
-                    sender.sendMessage("§e[§cSystemInfoLog§e] " + newtps.get(0) + ", " + newtps.get(1) + ", " + newtps.get(2) + ", " + newtps.get(3));
+                    int size = newtps.size();
+                    if(size == 3){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aServer TPS From last 1m, 5m, 15m: ");
+                        sender.sendMessage("§e[§cSystemInfoLog§e] " + newtps.get(0) + ", " + newtps.get(1) + ", " + newtps.get(2));
+                    } else if(size == 4){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aServer TPS From last 5s, 1m, 5m, 15m: ");
+                        sender.sendMessage("§e[§cSystemInfoLog§e] " + newtps.get(0) + ", " + newtps.get(1) + ", " + newtps.get(2) + ", " + newtps.get(3));
+                    } else{
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aServer TPS From last 5s, 1m, 5m, 15m: ");
+                        String tpsmessage = "§e[§cSystemInfoLog§e] §aServer TPS:";
+                        for(int i=0;i<size;i++){
+                            tpsmessage += newtps.get(i) + ", ";
+                        }
+                    }
                 }
             }
         }
