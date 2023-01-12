@@ -43,7 +43,6 @@ public class SystemInfoLog extends JavaPlugin {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    plugin.getServer().broadcastMessage("lol test");
                 }
             }.runTaskTimer(this.plugin, 600,600);
         }
