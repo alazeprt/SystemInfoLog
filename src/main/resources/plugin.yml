@@ -1,7 +1,7 @@
 name: SystemInfoLog
 main: org.alazeprt.SystemInfoLog
 api-version: 1.13
-version: 1.0
+version: 1.0.1
 commands:
   sysinfo:
     description: Main Command
