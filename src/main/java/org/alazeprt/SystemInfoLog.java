@@ -15,7 +15,7 @@ public class SystemInfoLog extends JavaPlugin {
             this.saveResource("message.yml",false);
         }
         System.out.println("§a------------");
-        System.out.println("§cSystemInfoLog §bv1.0 §dAlpha Version");
+        System.out.println("§cSystemInfoLog §bv1.0 §dBeta Version");
         System.out.println("§a------------");
         Objects.requireNonNull(getCommand("sysinfo")).setExecutor(new sysinfocommand());
         getServer().getPluginManager().registerEvents(new loginfo(this), this);
