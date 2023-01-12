@@ -4,7 +4,7 @@ import org.alazeprt.command.sysinfocommand;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.server.PluginEnableEvent;
+import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -39,10 +39,11 @@ public class SystemInfoLog extends JavaPlugin {
             plugin.getServer().getPluginManager().registerEvents(this, plugin);
         }
         @EventHandler
-        public void onPluginLoad(PluginEnableEvent event) {
+        public void onPluginLoad(ServerLoadEvent event) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
+
                 }
             }.runTaskTimer(this.plugin, 600,600);
         }
