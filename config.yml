@@ -1,0 +1,12 @@
+# SystemInfoLog Config File
+# Plugin Version
+version: "1.0"
+
+# Record Server Information
+log: false
+
+# Server information needs to be recorded
+logs:
+  tps: false # Server TPS
+  mspt: false # Server MSPT
+

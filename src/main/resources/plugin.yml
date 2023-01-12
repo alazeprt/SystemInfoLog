@@ -1,0 +1,6 @@
+name: SystemInfoLog
+main: org.alazeprt.SystemInfoLog
+version: 1.0
+commands:
+  sysinfo:
+    description: Main Command
