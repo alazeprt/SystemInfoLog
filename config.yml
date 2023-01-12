@@ -1,12 +1,38 @@
 # SystemInfoLog Config File
-# Plugin Version
-version: "1.0"
+# Command settings
+command:
+  disk:
+    # When obtaining disk information, the disk information to be output
+    # The name of the disk
+    diskname: true
 
-# Record Server Information
-log: false
+    # Read and write speed of disk
+    readspeed: true
+    writespeed: true
 
-# Server information needs to be recorded
-logs:
-  tps: false # Server TPS
-  mspt: false # Server MSPT
+  network:
+    # When obtaining network information, the network information to be output
+    # The name of the network
+    name: true
+
+    # The display name of the network
+    display_name: true
+
+    # MAC address of the network
+    mac: true
+
+    # ipv6 address of the network
+    ipv6: true
+
+    # Packet size sent by the network
+    sent_size: true
+
+    # Number of packets sent by the network
+    sent_num: true
+
+    # Packet size received by the network
+    recv_size: true
+
+    # Number of packets received by the network
+    recv_num: true
 

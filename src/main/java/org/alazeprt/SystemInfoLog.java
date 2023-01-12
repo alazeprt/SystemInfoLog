@@ -32,7 +32,7 @@ public class SystemInfoLog extends JavaPlugin {
 
     }
 
-    class loginfo implements Listener {
+    static class loginfo implements Listener {
         private final SystemInfoLog plugin;
         public loginfo(SystemInfoLog plugin) {
             this.plugin = plugin;

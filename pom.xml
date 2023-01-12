@@ -51,6 +51,11 @@
             <artifactId>hutool-all</artifactId>
             <version>5.8.11</version>
         </dependency>
+        <dependency>
+            <groupId>com.esotericsoftware.yamlbeans</groupId>
+            <artifactId>yamlbeans</artifactId>
+            <version>1.08</version>
+        </dependency>
     </dependencies>
 
 </project>

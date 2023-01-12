@@ -1,16 +1,26 @@
 package org.alazeprt.command;
 
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlReader;
+import org.alazeprt.SystemInfoLog;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 import cn.hutool.system.oshi.OshiUtil;
 
@@ -18,21 +28,57 @@ public class sysinfocommand implements CommandExecutor {
     private double[] tps;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+        // Threads
         class NetworkThread extends Thread{
             @Override
             public void run() {
+                File config = new File(org.alazeprt.SystemInfoLog.getPlugin(org.alazeprt.SystemInfoLog.class).getDataFolder(), "config.yml");
+                FileReader configr = null;
+                try {
+                    configr = new FileReader(config);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                YamlReader yamlReader = new YamlReader(configr);
+                Object object = null;
+                try {
+                    object = yamlReader.read();
+                } catch (YamlException e) {
+                    throw new RuntimeException(e);
+                }
+                Map map = (Map)object;
+                Object command = map.get("command");
+                Map map2 = (Map)command;
+                Object networko = map2.get("network");
+                Map network = (Map)networko;
                 for(int i = 0;i <= OshiUtil.getNetworkIFs().size() - 1; i++){
                     int j = i + 1;
                     sender.sendMessage("§e[§cSystemInfoLog§e] §a" + "Network " + j + ": ");
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork name: " + OshiUtil.getNetworkIFs().get(i).getName());
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork display name:" + OshiUtil.getNetworkIFs().get(i).getDisplayName());
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork mac address: " + OshiUtil.getNetworkIFs().get(i).getMacaddr());
+                    if(network.get("name").equals("true")){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork name: " + OshiUtil.getNetworkIFs().get(i).getName());
+                    }
+                    if(network.get("display_name").equals("true")){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork display name:" + OshiUtil.getNetworkIFs().get(i).getDisplayName());
+                    }
+                    if(network.get("mac").equals("true")){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork mac address: " + OshiUtil.getNetworkIFs().get(i).getMacaddr());
+                    }
                     sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ipv4 address: " + Arrays.toString(OshiUtil.getNetworkIFs().get(i).getIPv4addr()));
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ipv6 address: " + Arrays.toString(OshiUtil.getNetworkIFs().get(i).getIPv6addr()));
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ↓recv bytes: " + OshiUtil.getNetworkIFs().get(i).getBytesRecv());
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ↓recv packets: " + OshiUtil.getNetworkIFs().get(i).getPacketsRecv());
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ↑send bytes: " + OshiUtil.getNetworkIFs().get(i).getBytesSent());
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ↑send packets: " + OshiUtil.getNetworkIFs().get(i).getPacketsSent());
+                    if(network.get("ipv6").equals("true")){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ipv6 address: " + Arrays.toString(OshiUtil.getNetworkIFs().get(i).getIPv6addr()));
+                    }
+                    if(network.get("recv_size").equals("true")){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ↓recv bytes: " + OshiUtil.getNetworkIFs().get(i).getBytesRecv());
+                    }
+                    if(network.get("recv_num").equals("true")) {
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ↓recv packets: " + OshiUtil.getNetworkIFs().get(i).getPacketsRecv());
+                    }
+                    if(network.get("sent_size").equals("true")){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ↑sent bytes: " + OshiUtil.getNetworkIFs().get(i).getBytesSent());
+                    }
+                    if(network.get("sent_num").equals("true")){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aNetwork ↑sent packets: " + OshiUtil.getNetworkIFs().get(i).getPacketsSent());
+                    }
                 }
             }
         }
@@ -94,9 +140,30 @@ public class sysinfocommand implements CommandExecutor {
         class diskThread extends Thread{
             @Override
             public void run() {
+                File config = new File(org.alazeprt.SystemInfoLog.getPlugin(org.alazeprt.SystemInfoLog.class).getDataFolder(), "config.yml");
+                FileReader configr = null;
+                try {
+                    configr = new FileReader(config);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                YamlReader yamlReader = new YamlReader(configr);
+                Object object = null;
+                try {
+                    object = yamlReader.read();
+                } catch (YamlException e) {
+                    throw new RuntimeException(e);
+                }
+                Map map = (Map)object;
+                Object command = map.get("command");
+                Map map2 = (Map)command;
+                Object disko = map2.get("disk");
+                Map disk = (Map)disko;
                 for (int i = 0; i <= OshiUtil.getDiskStores().size() - 1; i++) {
                     sender.sendMessage("§e[§cSystemInfoLog§e] §aDisk " + i + ": ");
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §a" + OshiUtil.getDiskStores().get(i).getModel().replace(" (标准磁盘驱动器)", "") + ": ");
+                    if(disk.get("diskname").equals("true")){
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §a" + OshiUtil.getDiskStores().get(i).getModel().replace(" (标准磁盘驱动器)", "") + ": ");
+                    }
                     long size = OshiUtil.getDiskStores().get(i).getSize();
                     String formatsize;
                     if (size >= 1000 && size < 1000000) {
@@ -119,41 +186,46 @@ public class sysinfocommand implements CommandExecutor {
                     String formatwrite;
                     long read = OshiUtil.getDiskStores().get(i).getReadBytes();
                     long write = OshiUtil.getDiskStores().get(i).getWriteBytes();
-                    if (read >= 1000 && read < 1000000) {
-                        String content = String.format("%.2f", read / 1000.0);
-                        formatread = content + "KB";
-                    } else if (read >= 1000000 && read < 1000000000) {
-                        String content = String.format("%.2f", read / 1000000.0);
-                        formatread = content + "MB";
-                    } else if (read >= 1000000000 && read < 1e+012) {
-                        String content = String.format("%.2f", read / 1000000000.0);
-                        formatread = content + "GB";
-                    } else if (read >= 1e+012) {
-                        String content = String.format("%.2f", read / 1e+012);
-                        formatread = content + "TB";
-                    } else {
-                        formatread = read + "B";
+                    if(disk.get("readspeed").equals("true")){
+                        if (read >= 1000 && read < 1000000) {
+                            String content = String.format("%.2f", read / 1000.0);
+                            formatread = content + "KB";
+                        } else if (read >= 1000000 && read < 1000000000) {
+                            String content = String.format("%.2f", read / 1000000.0);
+                            formatread = content + "MB";
+                        } else if (read >= 1000000000 && read < 1e+012) {
+                            String content = String.format("%.2f", read / 1000000000.0);
+                            formatread = content + "GB";
+                        } else if (read >= 1e+012) {
+                            String content = String.format("%.2f", read / 1e+012);
+                            formatread = content + "TB";
+                        } else {
+                            formatread = read + "B";
+                        }
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aRead: " + formatread);
                     }
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aRead: " + formatread);
-                    if (write >= 1000 && write < 1000000) {
-                        String content = String.format("%.2f", write / 1000.0);
-                        formatwrite = content + "KB";
-                    } else if (write >= 1000000 && write < 1000000000) {
-                        String content = String.format("%.2f", write / 1000000.0);
-                        formatwrite = content + "MB";
-                    } else if (write >= 1000000000 && write < 1e+012) {
-                        String content = String.format("%.2f", write / 1000000000.0);
-                        formatwrite = content + "GB";
-                    } else if (write >= 1e+012) {
-                        String content = String.format("%.2f", write / 1e+012);
-                        formatwrite = content + "TB";
-                    } else {
-                        formatwrite = write + "B";
+                    if(disk.get("writespeed").equals("true")){
+                        if (write >= 1000 && write < 1000000) {
+                            String content = String.format("%.2f", write / 1000.0);
+                            formatwrite = content + "KB";
+                        } else if (write >= 1000000 && write < 1000000000) {
+                            String content = String.format("%.2f", write / 1000000.0);
+                            formatwrite = content + "MB";
+                        } else if (write >= 1000000000 && write < 1e+012) {
+                            String content = String.format("%.2f", write / 1000000000.0);
+                            formatwrite = content + "GB";
+                        } else if (write >= 1e+012) {
+                            String content = String.format("%.2f", write / 1e+012);
+                            formatwrite = content + "TB";
+                        } else {
+                            formatwrite = write + "B";
+                        }
+                        sender.sendMessage("§e[§cSystemInfoLog§e] §aWrite: " + formatwrite);
                     }
-                    sender.sendMessage("§e[§cSystemInfoLog§e] §aWrite: " + formatwrite);
                 }
             }
         }
+        // Commands
         int length = strings.length;
         if(length == 0){
             sender.sendMessage("§cSystemInfoLog Help");
@@ -187,6 +259,9 @@ public class sysinfocommand implements CommandExecutor {
                 sender.sendMessage("§e[§cSystemInfoLog§e] §b§oGetting data... Please wait...");
                 NetworkThread nw = new NetworkThread();
                 nw.start();
+            } else if(strings[0].equals("reload")){
+                sender.sendMessage("§e[§cSystemInfoLog§e] §aSuccessfully reloaded the configuration file!");
+                SystemInfoLog.getPlugin(SystemInfoLog.class).reloadConfig();
             } else{
                 sender.sendMessage("§cSystemInfoLog Help");
                 sender.sendMessage("§e/sysinfo tps §6View server TPS");
