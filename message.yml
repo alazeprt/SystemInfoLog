@@ -1,0 +1,79 @@
+# SystemInfoLog message configuration
+# Tip: You can use & instead of formatting code §
+# Plugin prefix
+prefix: "§e[§cSystemInfoLog§e]"
+
+# Command message
+command:
+  # Message of getting data
+  get_data: "§b§oGetting data... Please wait..."
+
+  # Output message about CPU
+  cpu:
+    # Prompt message for executing command
+    prompt: "§aCPU Information: "
+
+    # CPU name
+    name: "§aCPU Name: "
+
+    # Number of cpu cores
+    num: "§aCPU Core Number: "
+
+  # Output message about memory
+  memory:
+    # Prompt message for executing command
+    prompt: "§aMemory Information: "
+
+    # Memory usage
+    usage: "§aMemory Usage: "
+
+
+  # Output message about disk
+  disk:
+    # Prompt message for executing command
+    prompt: "§aDisk Information: "
+
+    # Disk serial number
+    # Tip: [num] refers to the serial number
+    serial: "§aDisk [num]: "
+
+    # Disk size
+    size: "§aSize: "
+
+    # Read speed of disk
+    read: "§aRead: "
+
+  network:
+    # Prompt message for executing command
+    prompt: "§aNetwork Information: "
+
+    # Network serial number
+    # Tip: [num] refers to the serial number
+    serial: "§aNetwork [num]: "
+
+    # Network name
+    name: "§aNetwork name: "
+
+    # Network display name
+    display: "§aNetwork display name:"
+
+    # Network mac address
+    mac: "§aNetwork mac address: "
+
+    # Metwork ipv4 address
+    ipv4: "§aNetwork ipv4 address: "
+
+    # Network ipv6 address
+    ipv6: "§aNetwork ipv6 address: "
+
+    # Packet size sent by the network
+    sent_size: "§aNetwork ↑sent bytes: "
+
+    # Number of packets sent by the network
+    sent_packets: "§aNetwork ↑sent packets: "
+
+    # Packet size received by the network
+    recv_size: "§aNetwork ↓recv bytes: "
+
+    # Number of packets received by the network
+    recv_packets: "§aNetwork ↓recv packets: "
