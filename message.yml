@@ -1,79 +1,105 @@
 # SystemInfoLog message configuration
 # Tip: You can use & instead of formatting code §
 # Plugin prefix
-prefix: "§e[§cSystemInfoLog§e]"
+prefix: "&e[&cSystemInfoLog&e]"
 
 # Command message
 command:
   # Message of getting data
-  get_data: "§b§oGetting data... Please wait..."
+  get_data: "&b&oGetting data... Please wait..."
 
   # Output message about CPU
   cpu:
     # Prompt message for executing command
-    prompt: "§aCPU Information: "
+    prompt: "&aCPU Information: "
 
     # CPU name
-    name: "§aCPU Name: "
+    name: "&aCPU Name: "
 
     # Number of cpu cores
-    num: "§aCPU Core Number: "
+    num: "&aCPU Core Number: "
 
   # Output message about memory
   memory:
     # Prompt message for executing command
-    prompt: "§aMemory Information: "
+    prompt: "&aMemory Information: "
 
     # Memory usage
-    usage: "§aMemory Usage: "
+    usage: "&aMemory Usage: "
 
 
   # Output message about disk
   disk:
     # Prompt message for executing command
-    prompt: "§aDisk Information: "
+    prompt: "&aDisk Information: "
 
     # Disk serial number
     # Tip: [num] refers to the serial number
-    serial: "§aDisk [num]: "
+    serial: "&aDisk [num]: "
 
     # Disk size
-    size: "§aSize: "
+    size: "&aSize: "
 
     # Read speed of disk
-    read: "§aRead: "
+    read: "&aRead: "
 
+    # Write speed of disk
+    write: "&aWrite: "
+
+  # Output message about disk
   network:
     # Prompt message for executing command
-    prompt: "§aNetwork Information: "
+    prompt: "&aNetwork Information: "
 
     # Network serial number
     # Tip: [num] refers to the serial number
-    serial: "§aNetwork [num]: "
+    serial: "&aNetwork [num]: "
 
     # Network name
-    name: "§aNetwork name: "
+    name: "&aNetwork name: "
 
     # Network display name
-    display: "§aNetwork display name:"
+    display: "&aNetwork display name:"
 
     # Network mac address
-    mac: "§aNetwork mac address: "
+    mac: "&aNetwork mac address: "
 
     # Metwork ipv4 address
-    ipv4: "§aNetwork ipv4 address: "
+    ipv4: "&aNetwork ipv4 address: "
 
     # Network ipv6 address
-    ipv6: "§aNetwork ipv6 address: "
+    ipv6: "&aNetwork ipv6 address: "
 
     # Packet size sent by the network
-    sent_size: "§aNetwork ↑sent bytes: "
+    sent_size: "&aNetwork ↑sent bytes: "
 
     # Number of packets sent by the network
-    sent_packets: "§aNetwork ↑sent packets: "
+    sent_packets: "&aNetwork ↑sent packets: "
 
     # Packet size received by the network
-    recv_size: "§aNetwork ↓recv bytes: "
+    recv_size: "&aNetwork ↓recv bytes: "
 
     # Number of packets received by the network
-    recv_packets: "§aNetwork ↓recv packets: "
+    recv_packets: "&aNetwork ↓recv packets: "
+
+  # Output message about help
+  help:
+    title: "&cSystemInfoLog Help"
+    tps: "&e/sysinfo tps &6View server TPS"
+    cpu: "&e/sysinfo cpu &6View CPU information and occupancy"
+    memory: "&e/sysinfo memory &6View memory usage"
+    disk: "&e/sysinfo disk &6View disk information"
+    network: "&e/sysinfo network &6View network information and stage"
+
+  # Output message about reload configuration
+  reload:
+    # Prompt message for executing command
+    prompt: "&aSuccessfully reloaded the configuration file!"
+
+  development_error: "&can error in plugin development. Please send issues in Github and report this information!"
+
+  tps:
+    error: "&cAn error occurred while reading tps: "
+    tps_size_3: "&aServer TPS From last 1m, 5m, 15m: "
+    tps_size_4: "&aServer TPS From last 5s, 1m, 5m, 15m: "
+    tps_size_other: "&aServer TPS: "
